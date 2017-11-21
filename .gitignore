@@ -1,0 +1,5 @@
+# bundle
+src/public/dist/
+
+# npm
+node_modules/
