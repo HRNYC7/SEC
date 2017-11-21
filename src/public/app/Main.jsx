@@ -1,14 +1,18 @@
 import React from 'react';
+import Search from './Search.jsx';
 
 class Main extends React.Component {
-  constructor(props) {
+  constructor() {
     super();
-    this.state = {};
+  }
+  handleSymbolSubmit(symbol) {
+    console.log(`submitting ${symbol} symbol!`);
   }
   render() {
     return (
-      <div className="main-wrapper">
-        <h1>SEC</h1>
+      <div className="main-container flex-centered">
+        <span className="main-title">SEC</span>
+        <Search handleSymbolSubmit={this.handleSymbolSubmit.bind(this)} />
       </div>
     );
   }
