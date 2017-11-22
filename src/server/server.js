@@ -1,19 +1,42 @@
-const express = require('express');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
 const errorHandler = require('errorhandler');
+const express = require('express');
+const http = require('http');
 const morgan = require('morgan');
 const path = require('path');
+<<<<<<< HEAD
 const http = require('http');
 const app = express();
 const dotenv = require('dotenv');
+=======
+>>>>>>> backend
 
-dotenv.config();
 
+<<<<<<< HEAD
 // API file for interacting with MySQL
 //const db = require('./server/config/schema');
 
 // Parsers
 app.use(morgan('dev'));
+=======
+/**
+ *  App configuration
+ */
+dotenv.config();
+
+/**
+ * API file for interacting with MySQL
+ */
+//const db = require('./server/config/schema');
+
+const app = express();
+
+/** 
+ * Middleware
+ */
+app.use(morgan("dev"));
+>>>>>>> backend
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -21,7 +44,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../public')));
 
 /**
- * Error Handler. Provides full stack - remove for production
+ * Error Handler. Provides full stack - REMOVE FOR PRODUCTION
  */
 app.use(errorHandler());
 
