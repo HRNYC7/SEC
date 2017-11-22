@@ -13,17 +13,35 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /*background: url('./assets/SECBackground.jpg') no-repeat center center fixed;
+  background: url('./assets/SECBackground.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;*/
+  background-size: cover;
 }
 
 .flex-centered {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.menu-container {
+  color: #fdfdfd;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 150px;
+  font-size: 14pt;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-button {
+  color: #fdfdfd;
+  text-decoration: none;
 }
 
 .search-container {
@@ -33,37 +51,22 @@ body {
   height: 100%;
   position: absolute;
   flex-direction: column;
-  background: url('./assets/SECBackground.jpg') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.search-wrapper {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .search-title {
   font-size: 50pt;
   margin-bottom: 30px;
   text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
-  z-index: 1;
 }
 
 .search-field {
   height: 60px;
   width: 180px;
+  margin-bottom: 80px;
   display: flex;
   border: 2px solid #fdfdfd;
   border-radius: 4px;
   box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
-  z-index: 1;
 }
 
 .search-input {
@@ -95,6 +98,7 @@ body {
   border-radius: 0px;
   background-color: rgba(0, 0, 0, 0);
   cursor: pointer;
+  text-decoration: none;
 }
 
 .search-submitButton:hover {
@@ -102,7 +106,29 @@ body {
 }
 
 .diff-container {
+  flex-direction: column;
+}
+
+.diff-menu {
   width: 200px;
-  height: 200px;
-  background-color: red;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0);
+  margin-bottom: 20px;
+  color: #fdfdfd;
+}
+
+.diff-text {
+  width: 46vh;
+  height: 60vh;
+  min-width: 300px;
+  min-height: 400px;
+  max-width: 500px;
+  max-height: 650px;
+  background-color: white;
+  color: black;
+  padding: 14px;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: auto;
+  font-size: 11pt;
 }
