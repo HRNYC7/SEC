@@ -1,30 +1,36 @@
-const express = require('express');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
 const errorHandler = require('errorhandler');
+const express = require('express');
+const http = require('http');
 const morgan = require('morgan');
 const path = require('path');
-const http = require('http');
-const app = express();
-const dotenv = require('dotenv');
-const { waitTimeJob, weatherJob} = require('./workers/workers');
 
+
+/**
+ *  App configuration
+ */
 dotenv.config();
 
-
-// API file for interacting with MySQL
+/**
+ * API file for interacting with MySQL
+ */
 //const db = require('./server/config/schema');
 
+const app = express();
 
-// Parsers
+/** 
+ * Middleware
+ */
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 
-// Angular DIST output folder
-app.use(express.static(path.join(__dirname, 'dist')));
+// React DIST output folder
+app.use(express.static(path.join(__dirname, '../public')));
 
 /**
- * Error Handler. Provides full stack - remove for production
+ * Error Handler. Provides full stack - REMOVE FOR PRODUCTION
  */
 app.use(errorHandler());
 
