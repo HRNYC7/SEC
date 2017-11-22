@@ -6,7 +6,7 @@ class Diff extends React.Component {
   }
   render() {
     return (
-      <div className="diff-container">
+      <div className="diff-container flex-centered">
         <span>this is the diff</span>
       </div>
     );
