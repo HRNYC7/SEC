@@ -5,21 +5,8 @@ const express = require('express');
 const http = require('http');
 const morgan = require('morgan');
 const path = require('path');
-<<<<<<< HEAD
-const http = require('http');
-const app = express();
-const dotenv = require('dotenv');
-=======
->>>>>>> backend
 
 
-<<<<<<< HEAD
-// API file for interacting with MySQL
-//const db = require('./server/config/schema');
-
-// Parsers
-app.use(morgan('dev'));
-=======
 /**
  *  App configuration
  */
@@ -36,7 +23,6 @@ const app = express();
  * Middleware
  */
 app.use(morgan("dev"));
->>>>>>> backend
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
