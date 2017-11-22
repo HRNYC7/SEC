@@ -1,4 +1,6 @@
 import React from 'react';
+import Search from './Search.jsx';
+import Diff from './Diff.jsx';
 import { render } from 'react-dom';
 import {
   HashRouter as Router,
@@ -8,14 +10,13 @@ import {
   // withRouter,
 } from 'react-router-dom';
 
-import Main from './Main.jsx';
-
 class App extends React.Component {
   render() {
     return (
       <Router>
         <div>
-          <Route exact path="/" render={() => <Main />} />
+          <Route exact path="/" render={() => <Search />} />
+          <Route exact path="/diff" render={() => <Diff />} />
         </div>
       </Router>
     );
