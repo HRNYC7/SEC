@@ -13,3 +13,36 @@ const filterDomForQtrlyFilingDocumentsURL = function(htmlObj){
     return a
   })
 } 
+
+ const getCIK = (ticker) => 
+  new Promise((resolve, reject) => {
+    const CikUrl = `https://csuite.xbrl.us/php/dispatch.php?Task=xbrlCIKLookup&Ticker=${ticker}`
+    fetch(CikUrl)
+      .then(response => response.text())
+      .then(xml => {
+        const cikIndex = xml.indexOf('<cik>') + 5
+        const CIK = xml.substring(cikIndex, cikIndex + 8)
+        resolve(CIK)
+      })
+      .catch(err => reject(err))
+  })
+
+
+module.exports.handleSearch = (req, res) => {
+  const ticker = req.query && req.query.q
+  if (ticker) {
+    //calls helpers
+    getCIK(ticker)
+      .then(CIK => {
+        // get more info
+        console.log(CIK)
+        res.send(`${CIK}`)
+      })
+      .catch(err => console.log(err))
+
+  } else {
+    res.send('denied')
+  }
+
+  // res.send(stuff)
+}
