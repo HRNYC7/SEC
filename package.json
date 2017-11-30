@@ -6,6 +6,7 @@
     "dotenv": "^4.0.0",
     "errorhandler": "^1.5.0",
     "express": "^4.15.3",
+    "isomorphic-fetch": "^2.2.1",
     "morgan": "^1.8.2",
     "nodemon": "^1.11.0",
     "react": "^15.6.1",

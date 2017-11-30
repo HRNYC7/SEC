@@ -21,6 +21,11 @@ class App extends React.Component {
   }
   handleSymbolSubmit() {
     console.log(`submitting ${this.state.symbolSearched} symbol!`);
+    const url = `/search?q=${this.state.symbolSearched}`
+    fetch(url)
+      .then(response => response.text())
+      .then(text => console.log(text))
+      .catch(err => console.error(err))
   }
   render() {
     return (

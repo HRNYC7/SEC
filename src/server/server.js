@@ -6,6 +6,7 @@ const http = require('http');
 const morgan = require('morgan');
 const path = require('path');
 
+const router = require('./routes/basic')
 
 /**
  *  App configuration
@@ -46,6 +47,7 @@ process.on('unhandledRejection', (r, p) => {
 /**
  * Primary app Routes
  */
+app.use(router)
 
 /**
  * TODO : Implement root GET request
