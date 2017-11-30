@@ -3,7 +3,7 @@
  */
 
 /*
-const Documents = db.Model.extends({})
+const Documents = ({})
 
 Documents.function = () => {}
 
