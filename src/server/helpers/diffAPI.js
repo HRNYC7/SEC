@@ -20,8 +20,8 @@ const filterDomForQtrlyFilingDocumentsURL = function(htmlObj){
     fetch(CikUrl)
       .then(response => response.text())
       .then(xml => {
-        const cikIndex = xml.indexOf('<cik>') + 5
-        const CIK = xml.substring(cikIndex, cikIndex + 8)
+        const re = new RegExp(/<cik>(\d*)<\/cik>/i);
+        const CIK = xml.match(re)[1];
         resolve(CIK)
       })
       .catch(err => reject(err))
