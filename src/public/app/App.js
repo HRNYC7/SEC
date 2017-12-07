@@ -3,7 +3,7 @@ import Menu from './Menu.jsx';
 import Search from './Search.jsx';
 import Diff from './Diff.jsx';
 import { render } from 'react-dom';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -29,11 +29,10 @@ class App extends React.Component {
   }
   render() {
     return (
-      <Router>
+      <HashRouter>
         <div>
-          <Route
-            exact
-            path="/"
+          <Route 
+            exact path="/"
             render={() => (
               <Search
                 symbolSearched={this.state.symbolSearched}
@@ -42,9 +41,8 @@ class App extends React.Component {
               />
             )}
           />
-          <Route
-            exact
-            path="/diff"
+          <Route 
+            exact path="/diff"
             render={() => (
               <Diff
                 symbolSearched={this.state.symbolSearched}
@@ -54,7 +52,7 @@ class App extends React.Component {
             )}
           />
         </div>
-      </Router>
+      </HashRouter>
     );
   }
 }
