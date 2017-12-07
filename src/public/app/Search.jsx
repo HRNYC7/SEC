@@ -4,6 +4,13 @@ import { Link } from 'react-router-dom';
 class Search extends React.Component {
   constructor(props) {
     super();
+    this.handleSearchEnterKeyPress = this.handleSearchEnterKeyPress.bind(this);
+  }
+  handleSearchEnterKeyPress(e) {
+    if (e.charCode == 13) {
+      this.props.handleSymbolSubmit()
+      window.location.href = "/#/diff";
+    }
   }
   render() {
     return (
@@ -15,6 +22,7 @@ class Search extends React.Component {
             placeholder="search.."
             value={this.props.symbolSearch}
             onChange={this.props.handleInputSymbol}
+            onKeyPress={this.handleSearchEnterKeyPress}
           />
           <Link
             to="/diff"
