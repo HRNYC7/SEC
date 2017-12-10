@@ -6,6 +6,6 @@ const fetch = require('isomorphic-fetch')
 
 const { handleSearch } = require('../helpers/diffAPI')
 
-router.get('/search', handleSearch)
+router.get('/search/:ticker', handleSearch)
 
 module.exports = router
