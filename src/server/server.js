@@ -63,8 +63,7 @@ const diffAPI = require('./helpers/diffAPI.js');
    * ALWAYS HAVE THIS COMMENTED OUT BEFORE PUSHING.
    */
 // app.get("/test", async (req, res) => {
-//   var c = await diffAPI.filterDomFor10QURL('https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000320193&type=10&dateb=&owner=exclude&count=12')
-//   console.log(c)
+//   var c = await diffAPI.filterDomFor10KURL('https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000320193&type=10&dateb=&owner=exclude&count=12')
 //   res.end(JSON.stringify(c))  
 // })
 
