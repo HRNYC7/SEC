@@ -8,52 +8,32 @@ const cheerio = require("cheerio");
 const apiHelpers = {
   filterDomFor10QURL: async function(url){
     const $ = await this.getDomTree(url);
-    console.log("-----------------------------------");
-    // $('.tableFile2').find('tbody').children().eq(2).children().eq(0).contents().map(function(c){
-    //   console.log(this)
-    // })
+    var b =[];
 
-
-    var a = $('.tableFile2').find('tbody').children()
-    .map(function(x) {
-    //   if(this.children[1].children[0].data === '10-K') {
-    //     return this
-    //   }
-
-      console.log('----------------')
-      console.log(this.children[2])
-      // console.log(this)
+    $('.tableFile2')
+    .find('tbody')
+    .children()
+    .each(function(x, i) {
+      if(this.children[1].children[0].data === '10-Q') {
+        b.push(this.children[3].children[0].attribs.href);
+      }
     })
-
-    // return $('tr')
-    // .filter(function(x) { 
-    //   return $(this)
-    //         .children()
-    //         .eq(0)[0]
-    //         .innerText == '10-K'
-    // })
-    // .map(function(x) {
-    //   var a = [];
-    //   a.push($(this).children().eq(1).children().eq(0)[0].href)
-    //   return a
-    // })
-    return 12;
+    return b;
   }, 
   
   filterDomFor10KURL: function(url) {
     const $ = this.getDomTree(url);
-    return $('tr')
-      .filter(function(x) { 
-        return $(this)
-              .children()
-              .eq(0)[0]
-              .innerText == '10-K'
-      })
-      .map(function(x) {
-        var a = [];
-        a.push($(this).children().eq(1).children().eq(0)[0].href)
-        return a
-      })
+    var b =[];
+    
+    $('.tableFile2')
+    .find('tbody')
+    .children()
+    .each(function(x, i) {
+      if(this.children[1].children[0].data === '10-K') {
+        b.push(this.children[3].children[0].attribs.href);
+      }
+    })
+    return b;
   },
   
   searchDomForFinalURL: function(htmlObj) {

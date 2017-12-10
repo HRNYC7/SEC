@@ -62,9 +62,11 @@ const diffAPI = require('./helpers/diffAPI.js');
    * Use this route as a test route before pushing code to upstream. 
    * ALWAYS HAVE THIS COMMENTED OUT BEFORE PUSHING.
    */
-app.get("/test", (req, res) => {
-  res.send(diffAPI.filterDomFor10QURL('https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000320193&type=10&dateb=&owner=exclude&count=12'))  
-})
+// app.get("/test", async (req, res) => {
+//   var c = await diffAPI.filterDomFor10QURL('https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000320193&type=10&dateb=&owner=exclude&count=12')
+//   console.log(c)
+//   res.end(JSON.stringify(c))  
+// })
 
 //Set Port
 const port = process.env.PORT || '3000';
