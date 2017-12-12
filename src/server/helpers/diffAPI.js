@@ -12,14 +12,23 @@ const filterDomFor10QURL = async function(url){
   .children()
   .each(function(x, i) {
     if(this.children[1].children[0].data === '10-Q') {
-      links.push(this.children[3].children[0].attribs.href);
+      links.push({
+        link: this.children[3].children[0].attribs.href,
+        date: this.children[7].children[0].data,
+        docType: "10-Q"
+      });
     }
   })
 
-  return Promise.all(links.map(async link => {
-    var finalURL = `https://www.sec.gov${link}`;
+  return Promise.all(links.map(async linkObj => {
+    var finalURL = `https://www.sec.gov${linkObj.link}`;
     var newLinkExt = await searchDomForFinalURL(finalURL, '10-Q');
-    return newLinkExt
+
+    return {
+      link: `https://www.sec.gov${newLinkExt}`,
+      date: formatDate(linkObj.date),
+      docType: linkObj.docType
+    }
   }))
 
 };
@@ -33,14 +42,23 @@ const filterDomFor10KURL = async function(url) {
   .children()
   .each(function() {
     if(this.children[1].children[0].data === '10-K') {
-      links.push(this.children[3].children[0].attribs.href);
+      links.push({
+        link: this.children[3].children[0].attribs.href,
+        date: this.children[7].children[0].data,
+        docType: "10-K"
+      });
     }
   })
 
-  return Promise.all(links.map(async link => {
-    var finalURL = `https://www.sec.gov${link}`;
+  return Promise.all(links.map(async linkObj => {
+    var finalURL = `https://www.sec.gov${linkObj.link}`;
     var newLinkExt = await searchDomForFinalURL(finalURL, '10-K');
-    return newLinkExt
+
+    return {
+      link: `https://www.sec.gov${newLinkExt}`,
+      date: formatDate(linkObj.date),
+      docType: linkObj.docType
+    }
   }))
 };
 
@@ -79,7 +97,7 @@ const getCIK = (ticker) => {
       .then(response => response.text())
       .then(xml => {
         const re = new RegExp(/<cik>(\d*)<\/cik>/i);
-        const CIK = xml.match(re)[1];
+        const CIK = xml.match(re) ? xml.match(re)[1] : 'Not a valid ticker'
         console.log(CIK)
         resolve(CIK)
       })
@@ -87,6 +105,19 @@ const getCIK = (ticker) => {
   })
 };
 
+const formatDate = date => {
+  const day = parseInt(date.slice(8,10));
+  const month = parseInt(date.slice(5,7));
+  const year = parseInt(date.slice(0,4));
+  var quarter;
+
+  if(month <= 3) quarter = 1;
+  else if (month > 3 && month <= 6) quarter = 2;
+  else if (month > 6 && month <= 9) quarter = 3;
+  else if (month > 9) quarter = 4;
+
+  return {year, month, day, quarter}
+};
 
 module.exports.handleSearch = async (req, res) => {
   const ticker = req.params.ticker
@@ -94,8 +125,12 @@ module.exports.handleSearch = async (req, res) => {
   if (ticker) {
     //calls helpers
     var CIK = await getCIK(ticker);
-    var links = await filterDomFor10QURL(`https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${CIK}&type=10&dateb=&owner=exclude&count=12`);
-    res.send(links)
+    if(CIK === "Not a valid ticker") {
+      res.send("Not a valid ticker")
+    } else {
+      var links = await filterDomFor10QURL(`https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${CIK}&type=10&dateb=&owner=exclude&count=12`);
+      res.send(links)
+    }
   } else {
     res.send('denied')
   }
