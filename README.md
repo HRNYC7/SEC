@@ -10,7 +10,7 @@ SEC Document Differ
 ### FEATURE LIST
 #### MVP
 ---
-1. Submit TICKER field
+1. ~~Submit TICKER field~~
 2. Recieve color coded diff document
 #### MVP+
 ---
