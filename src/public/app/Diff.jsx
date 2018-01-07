@@ -1,15 +1,18 @@
 import React from 'react';
 import Menu from './Menu.jsx';
+import Search from './Search.jsx';
+import Dropdown from './Dropdown.jsx'
 
 class Diff extends React.Component {
   constructor(props) {
-    super();
+    super(props);
   }
   render() {
     return (
       <div className="diff-container flex-centered">
         <Menu />
-        <div className="search-field">
+
+        {/* <div className="search-field">
           <input
             className="search-input"
             placeholder="search.."
@@ -22,8 +25,17 @@ class Diff extends React.Component {
           >
             submit
           </div>
-        </div>
-        <div className="diff-menu flex-centered">results for {this.props.symbolSearched}</div>
+        </div> */}
+
+        <Search 
+          symbolSearched={this.props.symbolSearched}
+          handleInputSymbol={this.props.handleInputSymbol}
+          handleSymbolSubmit={this.props.handleSymbolSubmit}
+        />
+        
+        {/* dropdown in development */}
+        <Dropdown links={this.props.links} />
+
         <div className="diff-text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation

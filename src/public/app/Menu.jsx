@@ -8,7 +8,7 @@ class Menu extends React.Component {
   render() {
     return (
       <div className="menu-container">
-        <Link to="/" className="menu-button">
+        <Link to="/" className="menu-button flex-centered">
           Home
         </Link>
       </div>
