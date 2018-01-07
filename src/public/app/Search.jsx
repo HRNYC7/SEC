@@ -14,24 +14,21 @@ class Search extends React.Component {
   }
   render() {
     return (
-      <div className="search-container flex-centered">
-        <span className="search-title">SEC</span>
-        <div className="search-field">
-          <input
-            className="search-input"
-            placeholder="search.."
-            value={this.props.symbolSearch}
-            onChange={this.props.handleInputSymbol}
-            onKeyPress={this.handleSearchEnterKeyPress}
-          />
-          <Link
-            to="/diff"
-            className="search-submitButton flex-centered"
-            onClick={this.props.handleSymbolSubmit}
-          >
-            submit
-          </Link>
-        </div>
+      <div className="search-field">
+        <input
+          className="search-input"
+          placeholder="search.."
+          value={this.props.symbolSearch}
+          onChange={this.props.handleInputSymbol}
+          onKeyPress={this.handleSearchEnterKeyPress}
+        />
+        <Link
+          to="/diff"
+          className="search-submitButton flex-centered"
+          onClick={this.props.handleSymbolSubmit}
+        >
+          submit
+        </Link>
       </div>
     );
   }
