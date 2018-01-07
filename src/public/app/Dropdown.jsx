@@ -11,7 +11,7 @@ class Dropdown extends React.Component {
           <ul className="dropdown-wrapper">
             {this.props.links.map((link, i) => {
               return (
-                <li className="dropdown-item">
+                <li className="dropdown-item" key={i}>
                   {i+1}: {link.docType} - {link.date.month}/{link.date.day}/{link.date.year}
                 </li>
               )

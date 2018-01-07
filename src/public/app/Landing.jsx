@@ -10,7 +10,7 @@ class Landing extends React.Component {
             <div className="landing-container flex-centered">
                 <span className="landing-title">SEC</span>
                 <Search 
-                    symbolSearched={this.props.symbolSearched}
+                    symbolToBeSearched={this.props.symbolToBeSearched}
                     handleInputSymbol={this.props.handleInputSymbol}
                     handleSymbolSubmit={this.props.handleSymbolSubmit}
                 />

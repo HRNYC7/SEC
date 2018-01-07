@@ -18,7 +18,7 @@ class Search extends React.Component {
         <input
           className="search-input"
           placeholder="search.."
-          value={this.props.symbolSearch}
+          value={this.props.symbolToBeSearched}
           onChange={this.props.handleInputSymbol}
           onKeyPress={this.handleSearchEnterKeyPress}
         />

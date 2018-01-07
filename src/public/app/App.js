@@ -10,6 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      symbolToBeSearched: '',
       symbolSearched: '',
       links: null,
     };
@@ -18,18 +19,23 @@ class App extends React.Component {
   }
   handleInputSymbol(e) {
     this.setState({
-      symbolSearched: e.target.value
+      symbolToBeSearched: e.target.value
     });
   }
   handleSymbolSubmit() {
-    console.log(`submitting ${this.state.symbolSearched} symbol!`);
-    const url = `/search/${this.state.symbolSearched}`
+    console.log(`submitting ${this.state.symbolToBeSearched} symbol!`);
+
+    // not setting
+    this.setState({
+      symbolSearched: this.state.symbolTobeSearched
+    })
+
+    const url = `/search/${this.state.symbolToBeSearched}`
     fetch(url)
       .then(response => response.json())
-      .then(text => {
-        console.log('text returned from fetch!', text)
+      .then(data => {
         this.setState({
-          links: text,
+          links: data,
         })
       })
       .catch(err => console.error('error returned from fetch!', err))
@@ -42,7 +48,7 @@ class App extends React.Component {
             exact path="/"
             render={() => (
               <Landing 
-                symbolSearched={this.state.symbolSearched}
+                symbolToBeSearched={this.state.symbolToBeSearched}
                 handleInputSymbol={this.handleInputSymbol}
                 handleSymbolSubmit={this.handleSymbolSubmit}
               />
@@ -52,6 +58,7 @@ class App extends React.Component {
             exact path="/diff"
             render={() => (
               <Diff
+                symbolToBeSearched={this.state.symbolToBeSearched}
                 symbolSearched={this.state.symbolSearched}
                 handleInputSymbol={this.handleInputSymbol}
                 handleSymbolSubmit={this.handleSymbolSubmit}

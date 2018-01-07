@@ -28,15 +28,18 @@ class Diff extends React.Component {
         </div> */}
 
         <Search 
-          symbolSearched={this.props.symbolSearched}
+          symbolToBeSearched={this.props.symbolToBeSearched}
           handleInputSymbol={this.props.handleInputSymbol}
           handleSymbolSubmit={this.props.handleSymbolSubmit}
         />
         
+        {/* in development */}
+        <span>results for {this.props.symbolSearched}</span>
+
         {/* dropdown in development */}
         <Dropdown links={this.props.links} />
 
-        <div className="diff-text">
+        {/* <div className="diff-text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
           ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
           ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
@@ -54,7 +57,8 @@ class Diff extends React.Component {
           some advantage from it? But who has any right to find fault with a man who chooses to
           enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces
           no resultant pleasure
-        </div>
+        </div> */}
+
       </div>
     );
   }
