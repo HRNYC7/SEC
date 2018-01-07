@@ -108,7 +108,7 @@ const getCIK = ticker => {
       .then(xml => {
         const re = new RegExp(/<cik>(\d*)<\/cik>/i);
         const CIK = xml.match(re) ? xml.match(re)[1] : 'Not a valid ticker'
-        console.log(CIK)
+        console.log(`CIK for ${ticker}: ${CIK}`)
         resolve(CIK)
       })
       .catch(err => reject(err))
@@ -135,16 +135,17 @@ const checkDatabase = async ticker => {
 
 module.exports.handleSearch = async (req, res) => {
   const ticker = req.params.ticker
-  console.log(ticker)
   if (ticker) {
     var links = await checkDatabase(ticker);
-    console.log(links)
     if(links.length === 0) {
       var CIK = await getCIK(ticker);
       if(CIK === "Not a valid ticker") {
         res.send("Not a valid ticker")
       } else {
-        links = await filterDomFor10QURL(ticker, CIK);
+        Qlinks = await filterDomFor10QURL(ticker, CIK);
+        Klinks = await filterDomFor10KURL(ticker, CIK);
+        links = Qlinks.concat(Klinks)
+        Documents.createMany(links);
       }
     }
     res.send(links)
