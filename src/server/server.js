@@ -14,9 +14,9 @@ const router = require('./routes/basic')
 dotenv.config();
 
 /**
- * API file for interacting with MySQL
+ * API file for interacting with Google Datastore
  */
-//const db = require('./server/config/schema');
+const Datastore = require('./config/schema.js');
 
 const app = express();
 

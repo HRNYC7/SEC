@@ -4,8 +4,10 @@ src/public/dist/
 # npm
 node_modules/
 /node_modules
+package-lock.json
 
 #keys 
 .env
-credentials/
 
+#credentials
+credentials/
