@@ -13,7 +13,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url('./assets/SECBackground.jpg') no-repeat center center fixed;
+  /* background: url('./assets/SECBackground.jpg') no-repeat center center fixed; */
+  background-color: #373737;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
