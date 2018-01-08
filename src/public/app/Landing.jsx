@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Dropdown from './Dropdown.jsx';
+import Message from './Message.jsx';
 import Search from './Search.jsx';
 
 class Landing extends React.Component {
@@ -17,7 +18,10 @@ class Landing extends React.Component {
 					handleInputSymbol={this.props.handleInputSymbol}
 					handleSymbolSubmit={this.props.handleSymbolSubmit}
 				/>
-				
+
+				{/* error message: incorrect ticker */}
+				{ this.props.message && <Message message={this.props.message} backgroundColor={'#DA4343'} /> }
+
 				{ this.props.searchedSymbol && <div className="landing-subheader">results for {this.props.searchedSymbol}</div>}
 
 				{ this.props.links && 
