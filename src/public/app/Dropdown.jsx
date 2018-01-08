@@ -6,7 +6,7 @@ class Dropdown extends React.Component {
   }
   render() {
     return (
-      <div className="dropdown-container flex-centered">
+      <div className="dropdown-container">
         {this.props.links && 
           <ul className="dropdown-wrapper">
             {this.props.links.map((link, i) => {
