@@ -29,6 +29,7 @@ body {
 
 .landing-container {
   flex-direction: column;
+  width: 250px;
 }
 
 .landing-title {
@@ -143,4 +144,12 @@ body {
 
 .dropdown-item a:visited {
   color: blue;
+}
+
+.message-container {
+  position: absolute;
+  top: 20px;
+  margin: 10px 0px 10px;
+  padding: 10px;
+  border-radius: 6px;
 }
