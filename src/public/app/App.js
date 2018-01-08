@@ -1,16 +1,15 @@
 import React from 'react';
-import Landing from './Landing.jsx';
-import Menu from './Menu.jsx';
-import Search from './Search.jsx';
-import Diff from './Diff.jsx';
 import { render } from 'react-dom';
 import { HashRouter, Route } from 'react-router-dom';
+
+import Landing from './Landing.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      symbolSearched: '',
+      symbolToBeSearched: null,
+      searchedSymbol: null,
       links: null,
     };
     this.handleInputSymbol = this.handleInputSymbol.bind(this);
@@ -18,18 +17,18 @@ class App extends React.Component {
   }
   handleInputSymbol(e) {
     this.setState({
-      symbolSearched: e.target.value
+      symbolToBeSearched: e.target.value
     });
   }
   handleSymbolSubmit() {
-    console.log(`submitting ${this.state.symbolSearched} symbol!`);
-    const url = `/search/${this.state.symbolSearched}`
+    console.log(`submitting ${this.state.symbolToBeSearched} symbol!`);
+    const url = `/search/${this.state.symbolToBeSearched}`
     fetch(url)
       .then(response => response.json())
-      .then(text => {
-        console.log('text returned from fetch!', text)
+      .then(data => {
         this.setState({
-          links: text,
+          links: data,
+          searchedSymbol: this.state.symbolToBeSearched,
         })
       })
       .catch(err => console.error('error returned from fetch!', err))
@@ -42,23 +41,14 @@ class App extends React.Component {
             exact path="/"
             render={() => (
               <Landing 
-                symbolSearched={this.state.symbolSearched}
-                handleInputSymbol={this.handleInputSymbol}
-                handleSymbolSubmit={this.handleSymbolSubmit}
-              />
-            )}
-          />
-          <Route 
-            exact path="/diff"
-            render={() => (
-              <Diff
-                symbolSearched={this.state.symbolSearched}
                 handleInputSymbol={this.handleInputSymbol}
                 handleSymbolSubmit={this.handleSymbolSubmit}
                 links={this.state.links}
+                symbolToBeSearched={this.state.symbolToBeSearched}
+                searchedSymbol={this.state.searchedSymbol}
               />
             )}
-          />
+          /> 
         </div>
       </HashRouter>
     );
