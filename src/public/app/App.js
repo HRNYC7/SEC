@@ -24,7 +24,6 @@ class App extends React.Component {
     });
   }
   handleSymbolSubmit() {
-    console.log(`submitting ${this.state.symbolToBeSearched} symbol!`);
     const url = `/search/${this.state.symbolToBeSearched}`
     fetch(url)
       .then(response => response.json())
@@ -35,7 +34,6 @@ class App extends React.Component {
         })
       })
       .catch(err => {
-        console.error('error returned from fetch!', err)
         this.handleMessage('Ticker does not exist. Please try again.')
       })
   }
