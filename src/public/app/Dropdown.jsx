@@ -6,13 +6,15 @@ class Dropdown extends React.Component {
   }
   render() {
     return (
-      <div className="dropdown-container">
+      <div className="dropdown-container flex-centered">
         {this.props.links && 
           <ul className="dropdown-wrapper">
             {this.props.links.map((link, i) => {
               return (
                 <li className="dropdown-item" key={i}>
-                  {i+1}: {link.docType} - {link.date.month}/{link.date.day}/{link.date.year}
+                  <a href={link.link} target="blank">
+                  {i+1}. {link.docType}  qtr: {link.date.quarter}  -  {link.date.year}
+                  </a>
                 </li>
               )
             })}

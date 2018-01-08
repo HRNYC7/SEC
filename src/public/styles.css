@@ -14,7 +14,7 @@ body {
   justify-content: center;
   align-items: center;
   /* background: url('./assets/SECBackground.jpg') no-repeat center center fixed; */
-  background-color: #373737;
+  background-color: #303030;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -35,6 +35,10 @@ body {
   font-size: 50pt;
   margin-bottom: 30px;
   text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.landing-subheader {
+  margin: 10px 0 10px;
 }
 
 .menu-container {
@@ -112,26 +116,6 @@ body {
   color: rgba(0, 0, 0, 0.3);
 }
 
-.diff-container {
-  flex-direction: column;
-}
-
-.diff-text {
-  width: 46vh;
-  height: 60vh;
-  min-width: 300px;
-  min-height: 400px;
-  max-width: 500px;
-  max-height: 650px;
-  background-color: white;
-  color: black;
-  padding: 14px;
-  padding: 10px;
-  box-sizing: border-box;
-  overflow: auto;
-  font-size: 11pt;
-}
-
 .dropdown-container {
   height: 100%;
   min-height: 60px;
@@ -149,5 +133,14 @@ body {
 }
 
 .dropdown-item {
+  padding: 4px 0px 4px;
+}
 
+.dropdown-item a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.dropdown-item a:visited {
+  color: blue;
 }
