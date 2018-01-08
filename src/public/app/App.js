@@ -36,7 +36,7 @@ class App extends React.Component {
       })
       .catch(err => {
         console.error('error returned from fetch!', err)
-        this.handleMessage('Incorrect ticker, please try again.')
+        this.handleMessage('Ticker does not exist. Please try again.')
       })
   }
   handleMessage(message) {

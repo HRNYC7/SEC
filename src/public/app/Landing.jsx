@@ -13,6 +13,7 @@ class Landing extends React.Component {
 			<div className="landing-container flex-centered">
 			
 				<span className="landing-title">SEC</span>
+				
 				<Search 
 					symbolToBeSearched={this.props.symbolToBeSearched}
 					handleInputSymbol={this.props.handleInputSymbol}
@@ -22,7 +23,12 @@ class Landing extends React.Component {
 				{/* error message: incorrect ticker */}
 				{ this.props.message && <Message message={this.props.message} backgroundColor={'#DA4343'} /> }
 
-				{ this.props.searchedSymbol && <div className="landing-subheader">results for {this.props.searchedSymbol}</div>}
+				{ this.props.searchedSymbol 
+					&& 
+					<div className="landing-subheader">
+						results for <span>{this.props.searchedSymbol.toUpperCase()}</span>
+					</div>
+				}
 
 				{ this.props.links && 
 					<Dropdown links={this.props.links} />
