@@ -118,13 +118,13 @@ body {
 
 .dropdown-container {
   width: 180px;
+  padding: 10px 0px;
   border: 2px solid #fdfdfd;
   border-radius: 4px;
   box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown-wrapper {
-
   list-style: none;
   padding: 0px;
   margin: 0px;
@@ -139,7 +139,7 @@ body {
 }
 
 .dropdown-item a {
-  padding: 6px 20px 6px;
+  padding: 6px 32px 6px;
   display: block;
   color: inherit;
   text-decoration: inherit;
