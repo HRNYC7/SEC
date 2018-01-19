@@ -10,13 +10,15 @@ class Dropdown extends React.Component {
         {this.props.links.length > 1 ?
           <ul className="dropdown-wrapper">
             {this.props.links.map((link, i) => {
-              return (
-                <li className="dropdown-item" key={i}>
-                  <a href={link.link} target="blank">
-                  {i+1}. {link.docType}  Q{link.date.quarter} {link.date.year}
-                  </a>
-                </li>
-              )
+              if(this.props.selectedFormType && link.docType === this.props.selectedFormType) {
+                return (
+                  <li className="dropdown-item" key={i}>
+                    <a href={link.link} target="blank">
+                    {i+1}. {link.docType}  Q{link.date.quarter} {link.date.year}
+                    </a>
+                  </li>
+                )
+              }
             })}
           </ul>
           :

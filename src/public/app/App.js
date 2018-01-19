@@ -12,11 +12,23 @@ class App extends React.Component {
       searchedSymbol: null,
       links: null,
       message: null,
+      availableFormTypes: null,
+      selectedFormType: null,
     };
     this.handleInputSymbol = this.handleInputSymbol.bind(this);
     this.handleSymbolSubmit = this.handleSymbolSubmit.bind(this);
     this.handleMessage = this.handleMessage.bind(this);
-
+    this.handleDocTypeTraversal = this.handleDocTypeTraversal.bind(this);
+    this.handleSelectFormType = this.handleSelectFormType.bind(this);
+  }
+  handleDocTypeTraversal(data) {
+    const docTypeList = [];
+    data.map(result => {
+      if(!docTypeList.includes(result.docType)) {
+        docTypeList.push(result.docType)
+      }
+    })
+    return docTypeList;
   }
   handleInputSymbol(e) {
     this.setState({
@@ -28,9 +40,12 @@ class App extends React.Component {
     fetch(url)
       .then(response => response.json())
       .then(data => {
+        console.log('returned from server', data)
         this.setState({
           links: data,
           searchedSymbol: this.state.symbolToBeSearched,
+          availableFormTypes: this.handleDocTypeTraversal(data),
+          selectedFormType: this.handleDocTypeTraversal(data)[0],
         })
       })
       .catch(err => {
@@ -46,7 +61,12 @@ class App extends React.Component {
         })
       }, 3000)
     }
-	}
+  }
+  handleSelectFormType(type) {
+    this.setState({
+      selectedFormType: type
+    })
+  } 
   render() {
     return (
       <HashRouter>
@@ -61,6 +81,9 @@ class App extends React.Component {
                 symbolToBeSearched={this.state.symbolToBeSearched}
                 searchedSymbol={this.state.searchedSymbol}
                 message={this.state.message}
+                availableFormTypes={this.state.availableFormTypes}
+                selectedFormType={this.state.selectedFormType}
+                handleSelectFormType={this.handleSelectFormType}
               />
             )}
           /> 

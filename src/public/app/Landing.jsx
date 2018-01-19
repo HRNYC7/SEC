@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Dropdown from './Dropdown.jsx';
+import TypeDropdown from './TypeDropdown.jsx';
 import Message from './Message.jsx';
 import Search from './Search.jsx';
 
@@ -31,7 +32,11 @@ class Landing extends React.Component {
 				}
 
 				{ this.props.links && 
-					<Dropdown links={this.props.links} />
+					<TypeDropdown availableFormTypes={this.props.availableFormTypes} handleSelectFormType={this.props.handleSelectFormType} />
+				}
+
+				{ this.props.links && 
+					<Dropdown links={this.props.links} selectedFormType={this.props.selectedFormType} />
 				}
 
 			</div>
