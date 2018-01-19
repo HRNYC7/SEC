@@ -1,11 +1,13 @@
 {
-  "name": "SEC",
+  "name": "sec",
   "version": "1.0.0",
   "dependencies": {
+    "@google-cloud/datastore": "^1.1.0",
     "body-parser": "^1.17.2",
     "cheerio": "^1.0.0-rc.2",
     "dotenv": "^4.0.0",
     "errorhandler": "^1.5.0",
+    "es6-promise": "^4.2.2",
     "express": "^4.15.3",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.2.1",
