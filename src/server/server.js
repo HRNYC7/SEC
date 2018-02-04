@@ -44,6 +44,7 @@ process.on('unhandledRejection', (r, p) => {
  * Import controllers
  */
 const diffAPI = require('./helpers/diffAPI.js');
+const engine = require('./helpers/engine.js');
 
 /**
  * Primary app Routes
@@ -64,10 +65,10 @@ app.use(router)
    * Use this route as a test route before pushing code to upstream. 
    * ALWAYS HAVE THIS COMMENTED OUT BEFORE PUSHING.
    */
-// app.get("/test", async (req, res) => {
-//   var c = await diffAPI.filterDomFor10KURL('https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000320193&type=10&dateb=&owner=exclude&count=12')
-//   res.end(JSON.stringify(c))  
-// })
+app.get("/test", async (req, res) => {
+  var c = await engine.extractCoreDoc('https://www.sec.gov/Archives/edgar/data/320193/000032019317000070/a10-k20179302017.htm#s2580FABA87865BC3AA85349AC36B2144')
+  res.end(JSON.stringify(c))  
+})
 
 //Set Port
 const port = process.env.PORT || '3000';

@@ -133,7 +133,7 @@ const checkDatabase = async ticker => {
   return await Documents.searchTicker(ticker);
 }
 
-module.exports.handleSearch = async (req, res) => {
+const handleSearch = async (req, res) => {
   const ticker = req.params.ticker
   if (ticker) {
     var links = await checkDatabase(ticker);
@@ -152,4 +152,9 @@ module.exports.handleSearch = async (req, res) => {
   } else {
     res.send('denied')
   }
+}
+
+module.exports = {
+  handleSearch,
+  getDomTree
 }
