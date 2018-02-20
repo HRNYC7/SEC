@@ -134,7 +134,7 @@ const checkDatabase = async ticker => {
 }
 
 const handleSearch = async (req, res) => {
-  const ticker = req.params.ticker
+  const ticker = req.params.ticker.toUpperCase();
   if (ticker) {
     var links = await checkDatabase(ticker);
     if(links.length === 0) {
