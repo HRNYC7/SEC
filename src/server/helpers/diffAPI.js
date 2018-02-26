@@ -96,7 +96,9 @@ const getDomTree = function(url) {
       return resp.text()
     })
     .then(body => {
-      return cheerio.load(body)
+      return cheerio.load(body, {
+        decodeEntities: true
+      })
     })
 };
 

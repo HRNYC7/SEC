@@ -29,7 +29,7 @@ const extractCoreDoc = async function(url1, url2) {
   // returns docHeaders section with table local for each section for easier access;
   var docHeaders1 = getSectionLocal($1, url1, docHeaders.slice(0,docHeaders.length - 1));
   var docHeaders2 = getSectionLocal($2, url2, docHeaders.slice(0,docHeaders.length - 1));
-  
+  // var d2 = docHeaders.slice(0,docHeaders.length - 1);
   // Only get content of 1st four.
   for(var i = 0; i <= 5; i++ ) {
     docHeaders1[i] = pushContent(url1, docHeaders1, $1, i);
@@ -73,18 +73,18 @@ const getSectionLocal = function($, url, domSectionsList) {
       }
     });
   } else {
-    $('text')
-    .find('b')
-    .each(function(x,i) {
-      if(this.parent.name = 'td') {
-        if(this.children[0] && this.children[0].data) {
-          var data = this.children[0].data;
-          var docHeaderIndexOfInnerText = domSectionsList.indexOf(data.slice(0,data.length - 1));
-          if(docHeaderIndexOfInnerText !== -1) {
-            domSectionsList[docHeaderIndexOfInnerText] = {
-              section: domSectionsList[docHeaderIndexOfInnerText],
-              tableIndex: x
-            }
+    $('text').find('table').filter(function(i, el) {
+      return $(this).find('b').filter(function(i, el) {
+        var txt = $(this).text()
+        txt = txt.slice(0,txt.length - 1)
+        return domSectionsList.indexOf(txt) > -1;
+      }).length > 0 
+    }).each(function(i, el) {
+      for(var i = 0; i < domSectionsList.length; i++) {
+        if($(this).text().indexOf(domSectionsList[i]) > -1) {
+          domSectionsList[i] = {
+            section: domSectionsList[i],
+            tableIndex: $(this).index()
           }
         }
       }
@@ -107,6 +107,19 @@ const getContent = function(url, domBody, startIndex, endIndex) {
     }
   } else {
     // Insert for non a- URL
+    while(currIndex < endIndex) {
+      var DomTextElement = domBody('text').children()[currIndex]
+      if(DomTextElement.children[0] && DomTextElement.children[0].type === 'text') {
+        DomTextElement.children.forEach(function(child) {
+          if(child.name === 'sup') {
+            content = content + `(${child.children[0].data})`
+          } else {
+            content = content + `${child.data}`;
+          }
+        })
+      }
+        currIndex++;
+    }
   }
 
   return content;
