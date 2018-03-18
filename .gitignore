@@ -1,0 +1,14 @@
+# bundle
+src/public/dist/
+
+# npm
+node_modules/
+/node_modules
+package-lock.json
+.npmrc
+
+#keys 
+.env
+
+#credentials
+credentials/
