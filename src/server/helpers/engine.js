@@ -2,7 +2,21 @@ const Diff = require('diff-match-patch');
 const { getDomTree } = require('../helpers/diffAPI.js');
 
 const diff = async function(url1, url2) {
-  const diffObj = Diff.diff_main(extractCoreDoc(url1), extractCoreDoc(url2));
+  var [core1, core2] = await extractCoreDoc(url1, url2);
+  var dmp = new Diff();
+  dmp.Diff_Timeout = 60;
+  var diffs = dmp.diff_main(core1[0].content, core2[0].content);
+  dmp.diff_cleanupSemantic(diffs);
+  return `<html> 
+  <head> 
+    <title>Express HTML</title>
+  </head> 
+  <body>
+    ${dmp.diff_prettyHtml(diffs)}
+  </body>
+  `
+  
+  dmp.diff_prettyHtml(diffs);
 }
 
 const extractCoreDoc = async function(url1, url2) {
@@ -29,7 +43,7 @@ const extractCoreDoc = async function(url1, url2) {
   // returns docHeaders section with table local for each section for easier access;
   var docHeaders1 = getSectionLocal($1, url1, docHeaders.slice(0,docHeaders.length - 1));
   var docHeaders2 = getSectionLocal($2, url2, docHeaders.slice(0,docHeaders.length - 1));
-  // var d2 = docHeaders.slice(0,docHeaders.length - 1);
+
   // Only get content of 1st four.
   for(var i = 0; i <= 5; i++ ) {
     docHeaders1[i] = pushContent(url1, docHeaders1, $1, i);
@@ -126,5 +140,5 @@ const getContent = function(url, domBody, startIndex, endIndex) {
 }
 
 module.exports = {
-  extractCoreDoc
+  diff
 }
