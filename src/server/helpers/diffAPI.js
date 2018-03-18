@@ -96,7 +96,9 @@ const getDomTree = function(url) {
       return resp.text()
     })
     .then(body => {
-      return cheerio.load(body)
+      return cheerio.load(body, {
+        decodeEntities: true
+      })
     })
 };
 
@@ -133,8 +135,8 @@ const checkDatabase = async ticker => {
   return await Documents.searchTicker(ticker);
 }
 
-module.exports.handleSearch = async (req, res) => {
-  const ticker = req.params.ticker
+const handleSearch = async (req, res) => {
+  const ticker = req.params.ticker.toUpperCase();
   if (ticker) {
     var links = await checkDatabase(ticker);
     if(links.length === 0) {
@@ -152,4 +154,9 @@ module.exports.handleSearch = async (req, res) => {
   } else {
     res.send('denied')
   }
+}
+
+module.exports = {
+  handleSearch,
+  getDomTree
 }
