@@ -97,7 +97,8 @@ const getDomTree = function(url) {
     })
     .then(body => {
       return cheerio.load(body, {
-        decodeEntities: true
+        decodeEntities: true,
+        normalizeWhitespace: true,
       })
     })
 };

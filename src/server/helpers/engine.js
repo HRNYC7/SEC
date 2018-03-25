@@ -5,18 +5,24 @@ const diff = async function(url1, url2) {
   var [core1, core2] = await extractCoreDoc(url1, url2);
   var dmp = new Diff();
   dmp.Diff_Timeout = 60;
-  var diffs = dmp.diff_main(core1[0].content, core2[0].content);
-  dmp.diff_cleanupSemantic(diffs);
+
+  var retHTML = "";
+
+  for(var i = 0; i <= 5; i++) {
+    var section = dmp.diff_main(core1[i].content, core2[i].content);
+    dmp.diff_cleanupSemantic(section);
+    retHTML = `${retHTML}${dmp.diff_prettyHtml(section)}<hr align="CENTER" seize="3" style="COLOR: #999999" width="100%">`; 
+  }
+
   return `<html> 
   <head> 
     <title>Express HTML</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   </head> 
   <body>
-    ${dmp.diff_prettyHtml(diffs)}
+    ${retHTML}
   </body>
   `
-  
-  dmp.diff_prettyHtml(diffs);
 }
 
 const extractCoreDoc = async function(url1, url2) {
@@ -115,7 +121,7 @@ const getContent = function(url, domBody, startIndex, endIndex) {
     while(currIndex < endIndex) {
       var DomTextElement = domBody('text').children()[currIndex]
       if(DomTextElement.children[0] && DomTextElement.children[0].name === 'font') {
-        content = content + DomTextElement.children[0].children[0].data + "\n";
+        content = content + DomTextElement.children[0].children[0].data + "\n\n";
       }
         currIndex++;
     }
@@ -126,9 +132,15 @@ const getContent = function(url, domBody, startIndex, endIndex) {
       if(DomTextElement.children[0] && DomTextElement.children[0].type === 'text') {
         DomTextElement.children.forEach(function(child) {
           if(child.name === 'sup') {
-            content = content + `(${child.children[0].data})`
+            content = content + child.children[0].data;
           } else {
-            content = content + `${child.data}`;
+            if(child.data !== "\\n"){
+              var str = "" + child.data;
+              while(str.indexOf("//n") > -1) {
+                // str = str.replace("//n", " ")
+              }
+              content = content + str;
+            }
           }
         })
       }
@@ -138,6 +150,7 @@ const getContent = function(url, domBody, startIndex, endIndex) {
 
   return content;
 }
+
 
 module.exports = {
   diff
