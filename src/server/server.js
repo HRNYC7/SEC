@@ -66,7 +66,7 @@ app.use(router)
    * ALWAYS HAVE THIS COMMENTED OUT BEFORE PUSHING.
    */
 app.get("/test", async (req, res) => {
-  var c = await engine.diff('https://www.sec.gov/Archives/edgar/data/320193/000032019317000070/a10-k20179302017.htm#s2580FABA87865BC3AA85349AC36B2144', 'https://www.sec.gov/Archives/edgar/data/320193/000119312515356351/d17062d10k.htm')
+  var c = await engine.diff('https://www.sec.gov/Archives/edgar/data/320193/000119312515356351/d17062d10k.htm', 'https://www.sec.gov/Archives/edgar/data/320193/000032019317000070/a10-k20179302017.htm#s2580FABA87865BC3AA85349AC36B2144')
 
   res.end(c)  
   // res.end(JSON.stringify(c))  
