@@ -121,7 +121,18 @@ const getContent = function(url, domBody, startIndex, endIndex) {
     while(currIndex < endIndex) {
       var DomTextElement = domBody('text').children()[currIndex]
       if(DomTextElement.children[0] && DomTextElement.children[0].name === 'font') {
-        content = content + DomTextElement.children[0].children[0].data + "\n\n";
+        if(DomTextElement.children.length > 1) {
+          for(var i = 0; i < DomTextElement.children.length; i++) {
+            if(DomTextElement.children[i].children[0].data === undefined){
+              content = content + DomTextElement.children[i].children[0].children[0].data;
+            } else {
+              content = content + DomTextElement.children[i].children[0].data
+            }
+          }
+          content = content + "\n\n";
+        } else {
+          content = content + DomTextElement.children[0].children[0].data + "\n\n";
+        }
       }
         currIndex++;
     }
@@ -129,18 +140,11 @@ const getContent = function(url, domBody, startIndex, endIndex) {
     // Insert for non a- URL
     while(currIndex < endIndex) {
       var DomTextElement = domBody('text').children()[currIndex]
-      if(DomTextElement.children[0] && DomTextElement.children[0].type === 'text') {
+      if(DomTextElement.name === 'p') {
         DomTextElement.children.forEach(function(child) {
-          if(child.name === 'sup') {
-            content = content + child.children[0].data;
-          } else {
-            if(child.data !== "\\n"){
-              var str = "" + child.data;
-              while(str.indexOf("//n") > -1) {
-                // str = str.replace("//n", " ")
-              }
-              content = content + str;
-            }
+          content = content + dig(child);
+          if(child.type === 'tag' && child.children.length === 1 && child.next === null) {
+            content = content + "\n\n"
           }
         })
       }
@@ -148,6 +152,26 @@ const getContent = function(url, domBody, startIndex, endIndex) {
     }
   }
 
+  return content;
+}
+
+const dig = function(de) {
+  var content = ""
+  // No children && data
+  if(de.data && de.children === undefined) {
+    content = content + de.data
+  } else if(de.data === undefined && de.children) {
+    // no data && children
+    de.children.forEach(function(child) {
+      content = content + dig(child);
+    })
+  } else if(de.data && de.children) {
+    // data && children
+    content = content + data;
+    de.children.forEach(function(child) {
+      content = content + dig(child);
+    })
+  }
   return content;
 }
 
