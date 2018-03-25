@@ -2,8 +2,10 @@
 src/public/dist/
 
 # npm
-node_modules/
-/node_modules
+node_modules/*
+!node_modules/diff-match-patch/
+
+
 package-lock.json
 .npmrc
 
